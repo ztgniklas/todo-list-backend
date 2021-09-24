@@ -6,4 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
+    default User loadUserByName(String username) {
+        if (existsById(username)) {
+            return getById(username);
+        }
+        return null;
+    }
 }
